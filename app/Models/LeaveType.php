@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Employee extends Model
+class LeaveType extends Model
 {
-    use HasFactory;
+    protected $fillable = ['name', 'default_approval_level'];
 
     public function leaveApplications(): HasMany
     {

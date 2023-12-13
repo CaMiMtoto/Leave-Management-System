@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\LeaveFlow;
+use App\Models\LeaveType;
 use Illuminate\Http\Request;
 
-class LeaveFlowController extends Controller
+class LeaveTypeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -34,7 +34,7 @@ class LeaveFlowController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(LeaveFlow $leaveFlow)
+    public function show(LeaveType $leaveType)
     {
         //
     }
@@ -42,7 +42,7 @@ class LeaveFlowController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(LeaveFlow $leaveFlow)
+    public function edit(LeaveType $leaveType)
     {
         //
     }
@@ -50,7 +50,7 @@ class LeaveFlowController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, LeaveFlow $leaveFlow)
+    public function update(Request $request, LeaveType $leaveType)
     {
         //
     }
@@ -58,7 +58,7 @@ class LeaveFlowController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(LeaveFlow $leaveFlow)
+    public function destroy(LeaveType $leaveType)
     {
         //
     }

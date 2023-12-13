@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApprovalLevelController;
 use App\Http\Controllers\Auth\ResetPasswordController;
+use App\Http\Controllers\LeaveApplicationController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -24,7 +25,12 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('approval-levels', ApprovalLevelController::class)->middleware('can:canManageApprovalLevels');
 
-Route::get('/set-password/{user}', [ResetPasswordController::class,'setPasswordForm'])->name('set-password-form');
-Route::post('/set-password/{user}', [ResetPasswordController::class,'setPassword'])->name('set-password');
+Route::get('/set-password/{user}', [ResetPasswordController::class, 'setPasswordForm'])->name('set-password-form');
+Route::post('/set-password/{user}', [ResetPasswordController::class, 'setPassword'])->name('set-password');
+
+
+Route::get('/leave/{leaveApplication}/details', [LeaveApplicationController::class, 'details'])->name('leave.details');
+Route::post('/leave/{leaveApplication}/approve', [LeaveApplicationController::class, 'approveLeave'])->name('leave.approve');
+
 
 
