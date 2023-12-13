@@ -4,7 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Http\Requests\UpdateEmployeeRequest;
+use App\Mail\PasswordReset;
 use App\Models\Employee;
+use App\Models\User;
+use App\Notifications\UserCreatedNotification;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class EmployeeController extends Controller
 {
@@ -24,12 +30,32 @@ class EmployeeController extends Controller
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(StoreEmployeeRequest $request)
     {
-        //
+        $data = $request->validated();
+
+        // Create a new user
+        $user = User::create([
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+            'password' => Hash::make(Str::random(12)), // Auto-generate a random password
+        ]);
+
+        // Create a new employee and associate it with the user
+        $employee = $user->employee()->create([
+            'name' => $request->input('name'),
+            // Add other fields as needed
+        ]);
+
+        // Send an email to the user with a link to reset their password
+        $this->sendPasswordResetEmail($user);
+
+        return redirect()->route('employees.index')->with('success', 'Employee created successfully. Check your email for the password reset link.');
+    }
+
+    private function sendPasswordResetEmail(User $user)
+    {
+        $user->notify(new UserCreatedNotification());
     }
 
     /**
