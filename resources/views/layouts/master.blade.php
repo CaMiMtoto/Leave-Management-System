@@ -7,8 +7,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
-    <!-- Scripts -->
+    <title>@yield('title') {{ config('app.name', 'Laravel') }}</title>
+    <!--begin::Javascript-->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 <!--begin::Body-->
@@ -51,7 +51,12 @@
             <!--begin::Main-->
             <div class="app-main flex-column flex-row-fluid" id="kt_app_main">
                 <!--begin::Content wrapper-->
-                @yield('content')
+                <div id="kt_app_content" class="app-content flex-column-fluid">
+                    <!--begin::Content container-->
+                    <div id="kt_app_content_container" class="app-container container-fluid">
+                        @yield('content')
+                    </div>
+                </div>
                 <!--end::Content wrapper-->
                 <!--begin::Footer-->
                 @include('layouts._footer')
@@ -80,13 +85,12 @@
 <!--end::Scrolltop-->
 
 <!--end::Modals-->
-<!--begin::Javascript-->
-<script>var hostUrl = "assets/";</script>
-<!--begin::Global Javascript Bundle(mandatory for all pages)-->
-<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
-<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+
 <!--end::Custom Javascript-->
 <!--end::Javascript-->
+<script src="{{ asset('assets/plugins/global/plugins.bundle.js') }}"></script>
+<script src="{{ asset('assets/js/scripts.bundle.js') }}"></script>
+@stack('scripts')
 </body>
 <!--end::Body-->
 </html>

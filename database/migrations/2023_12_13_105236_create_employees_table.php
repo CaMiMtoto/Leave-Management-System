@@ -17,8 +17,7 @@ return new class extends Migration {
             $table->string('phone');
             $table->string('address');
             $table->string('position');
-            $table->string('salary');
-            $table->string('photo');
+            $table->decimal('salary', 15)->nullable();
             $table->string('status')->default('active');
             $table->timestamps();
         });

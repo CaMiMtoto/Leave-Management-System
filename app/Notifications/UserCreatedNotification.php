@@ -13,13 +13,23 @@ class UserCreatedNotification extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    // Add any additional properties or methods you may need
+    public function __construct()
+    {
+        //
+    }
+
+    public function via($notifiable): array
+    {
+        return ['mail'];
+    }
 
     public function toMail($notifiable): MailMessage
     {
         return (new MailMessage)
             ->subject('Welcome! Set Your Password')
             ->line('You have been added to the system. Please click the link below to set your password.')
+            ->line("Your username is {$notifiable->email}")
+            ->line('This link will expire in 2 hours.')
             ->action('Set Password', $this->getSetPasswordUrl($notifiable))
             ->line('If you did not request this, no further action is required.');
     }

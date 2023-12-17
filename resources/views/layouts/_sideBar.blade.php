@@ -39,7 +39,7 @@
             <!--begin:Menu item-->
             <div class="menu-item here">
                 <!--begin:Menu link-->
-                <a href="" class="menu-link">
+                <a href="{{ route('employees.index') }}" class="menu-link">
                     <div class="menu-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-users" width="24"
                              height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"

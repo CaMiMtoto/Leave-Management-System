@@ -105,7 +105,7 @@
                 <div class="cursor-pointer symbol symbol-30px symbol-lg-40px"
                      data-kt-menu-trigger="{default: 'click', lg: 'hover'}" data-kt-menu-attach="parent"
                      data-kt-menu-placement="bottom-end">
-                    <img src="{{ asset('assets/media/avatars/300-2.jpg') }}" alt="user"/>
+                    <img src="{{ auth()->user()->profilePhotoUrl }}" alt="user"/>
                 </div>
                 <!--begin::User account menu-->
                 <div
@@ -116,17 +116,18 @@
                         <div class="menu-content d-flex align-items-center px-3">
                             <!--begin::Avatar-->
                             <div class="symbol symbol-50px me-5">
-                                <img alt="Logo" src="{{ asset('assets/media/avatars/300-2.jpg') }}"/>
+                                <img alt="Logo" src="{{ auth()->user()->profilePhotoUrl }}"/>
                             </div>
                             <!--end::Avatar-->
                             <!--begin::Username-->
                             <div class="d-flex flex-column">
-                                <div class="fw-bold d-flex align-items-center fs-5">Jane Cooper
-                                    <span
-                                        class="badge badge-light-success fw-bold fs-8 px-2 py-1 ms-2">Pro</span>
+                                <div class="fw-bold d-flex align-items-center fs-5">
+                                    {{ Auth::user()->name }}
                                 </div>
                                 <a href="#"
-                                   class="fw-semibold text-muted text-hover-primary fs-7">jane@kt.com</a>
+                                   class="fw-semibold text-muted text-hover-primary fs-7">
+                                    {{ Auth::user()->email }}
+                                </a>
                             </div>
                             <!--end::Username-->
                         </div>
@@ -256,9 +257,12 @@
                     <!--end::Menu item-->
                     <!--begin::Menu item-->
                     <div class="menu-item px-5">
-                        <a href="" class="menu-link px-5">
-                            Sign Out
-                        </a>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a href="{{ route('logout') }}" class="menu-link px-5" onclick="event.preventDefault(); this.closest('form').submit();">
+                                Sign Out
+                            </a>
+                        </form>
                     </div>
                     <!--end::Menu item-->
                 </div>
